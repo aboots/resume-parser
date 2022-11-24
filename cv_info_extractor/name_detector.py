@@ -4,11 +4,11 @@ import re
 
 class NameDetection:
     def __init__(self):
-        file = open('resources/last_names_regex.json', 'r', encoding="utf-8")
+        file = open('cv_info_extractor/resources/last_names_regex.json', 'r', encoding="utf-8")
         self.last_names_reg = json.loads(file.read())
         file.close()
 
-        file = open('resources/first_names_regex.json', 'r', encoding="utf-8")
+        file = open('cv_info_extractor/resources/first_names_regex.json', 'r', encoding="utf-8")
         self.first_names_reg = json.loads(file.read())
         file.close()
 
@@ -24,8 +24,8 @@ class NameDetection:
                 matches.append(matched)
         return matches
 
-    def hide_person_name(self, text):
+    def find_name(self, text):
         matched_names = self.match_name(text)
-        for i in matched_names:
-            text = text.replace(i.group(), " <#person_name#> ")
-        return text.strip()
+        if not matched_names:
+            return 'Not Found'
+        return matched_names[0].group().strip()
