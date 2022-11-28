@@ -3,6 +3,7 @@ from hazm import Normalizer
 
 from cv_info_extractor.email_detector import EmailDetection
 from cv_info_extractor.name_detector import NameDetection
+from cv_info_extractor.phone_number_detector import PhoneNumberDetection
 
 
 def run(address, use_pos=True, output_file='output.txt'):
@@ -11,8 +12,8 @@ def run(address, use_pos=True, output_file='output.txt'):
     for page in reader.pages:
         text = page.extract_text()
         final_text += text
-    # print(final_text)
     email = EmailDetection().find_email(final_text)
+    # print(final_text)
     print(f"Email = {email}")
     normalizer = Normalizer()
     final_text = normalizer.normalize(final_text)
@@ -20,3 +21,5 @@ def run(address, use_pos=True, output_file='output.txt'):
     print(f"Full Name = {full_name}")
     print(f"First Name = {first_name}")
     print(f"Last Name = {last_name}")
+    phone_number = PhoneNumberDetection().find_phone_number(final_text)
+    print(f'Phone Number = {phone_number}')
