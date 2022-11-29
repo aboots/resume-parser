@@ -4,13 +4,11 @@ import re
 
 class NameDetection:
     def __init__(self):
-        file = open('cv_info_extractor/resources/last_names_regex.json', 'r', encoding="utf-8")
-        self.last_names_reg = json.loads(file.read())
-        file.close()
+        with open('cv_info_extractor/resources/last_names_regex.json', 'r', encoding="utf-8") as file:
+            self.last_names_reg = json.loads(file.read())
 
-        file = open('cv_info_extractor/resources/first_names_regex.json', 'r', encoding="utf-8")
-        self.first_names_reg = json.loads(file.read())
-        file.close()
+        with open('cv_info_extractor/resources/first_names_regex.json', 'r', encoding="utf-8") as file:
+            self.first_names_reg = json.loads(file.read())
 
         self.pattern = f"(^|\W)((((({self.first_names_reg})(\W+))+)({self.last_names_reg}))|({self.last_names_reg})|({self.first_names_reg}))($|\W)"
 

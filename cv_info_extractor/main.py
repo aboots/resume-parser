@@ -26,3 +26,4 @@ def run(address, use_pos=True, output_file='output.txt'):
     print(f'Phone Number = {phone_number}')
     date = DateDetection().find_date_number(final_text)
     print(f'Date = {date}')
+    
