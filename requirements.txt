@@ -1,5 +1,7 @@
 hazm==0.7.0
+libwapiti==0.2.1
 nltk==3.3
+persiantools==3.0.1
 PyPDF2==2.11.2
 six==1.16.0
 typing_extensions==4.4.0
