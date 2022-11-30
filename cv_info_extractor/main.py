@@ -5,6 +5,7 @@ from cv_info_extractor.email_detector import EmailDetection
 from cv_info_extractor.name_detector import NameDetection
 from cv_info_extractor.phone_number_detector import PhoneNumberDetection
 from cv_info_extractor.date_extractor import DateDetection
+from cv_info_extractor.section_extractor import SectionExtractor
 
 
 def run(address, use_pos=True, output_file='output.txt'):
@@ -14,7 +15,6 @@ def run(address, use_pos=True, output_file='output.txt'):
         text = page.extract_text()
         final_text += text
     email = EmailDetection().find_email(final_text)
-    print(final_text)
     print(f"Email = {email}")
     normalizer = Normalizer()
     final_text = normalizer.normalize(final_text)
@@ -26,4 +26,5 @@ def run(address, use_pos=True, output_file='output.txt'):
     print(f'Phone Number = {phone_number}')
     date = DateDetection().find_date_number(final_text)
     print(f'Date = {date}')
-    
+    extra = SectionExtractor().find_sections(final_text)
+    print(f'Extra = {extra}')
