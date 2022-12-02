@@ -12,12 +12,10 @@ class SectionExtractor:
         idxs.append(len(inp))
         idxs.sort()
         print(idxs)
-        matches = [inp[idxs[i]:idxs[i+1]] for i in range(len(idxs) - 1)]
-        print('These are matches: ', matches)
+        matches = [inp[idxs[i]:idxs[i + 1]] for i in range(len(idxs) - 1)]
         return matches
 
     def find_sections(self, text):
-        
         matched_sections = self.match_sections(text)
         if not matched_sections:
             return 'Not Found'

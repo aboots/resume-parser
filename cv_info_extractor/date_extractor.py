@@ -12,7 +12,6 @@ class DateDetection:
     def match_date(self, inp1):
         matches = []
         inp = digits.fa_to_en(inp1)
-        print(inp)
         for matched in re.finditer(self.pattern, inp):
             start, end = matched.span()
             inp = inp[:start] + '#' * (end - start) + inp[end:]
