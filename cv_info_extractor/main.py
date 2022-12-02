@@ -21,8 +21,6 @@ def run(address):
     normalizer = Normalizer()
     final_text = normalizer.normalize(final_text)
     final_text = CusNormalizer().normalize(final_text)
-    print(final_text)
-    final_text = re.sub(r'\s+', ' ', final_text)
     result['ایمیل'] = email
     full_name, first_name, last_name = NameDetection().find_name(final_text)
     result['نام'] = first_name
@@ -35,4 +33,5 @@ def run(address):
     for info in extra:
         if type(info) == dict:
             result.update(info)
+    print(result)
     return result

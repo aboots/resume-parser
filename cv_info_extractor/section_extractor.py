@@ -13,8 +13,6 @@ class SectionExtractor:
         idxs.sort(key=lambda x: list(x.values())[0])
         idx_vals = [list(i.values())[0] for i in idxs]
         matches = [{list(idxs[i].keys())[0]:inp[idx_vals[i] + len(list(idxs[i].keys())[0]) + 1:idx_vals[i+1]]} for i in range(len(idx_vals) - 1)]
-        for i in matches:
-            print(f'THIS IS THE MATCHED SECTION: {i}')
         return matches
 
     def find_sections(self, text):
