@@ -5,7 +5,7 @@ from cv_info_extractor import run
 
 # run("cv_test_2.pdf")
 
-cvs = ['CV3', 'CV2']
+cvs = ['CV1', 'CV2']
 res = []
 
 for cv in cvs:

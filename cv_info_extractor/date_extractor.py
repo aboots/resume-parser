@@ -33,6 +33,6 @@ class DateDetection:
                 matched_dates = self.match_date(text1[::-1])
                 if not matched_dates:
                     return 'Not Found'
-                return matched_dates
-            return matched_dates
+                return matched_dates[0]
+            return matched_dates[0]
         return 'Not Found'
