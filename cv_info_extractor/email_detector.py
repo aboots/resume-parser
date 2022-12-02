@@ -8,12 +8,11 @@ class EmailDetection:
 
     def match_email(self, inp):
         matches = []
-        for keyword_count in range(10, 0, -1):
-            count_pattern = self.pattern.format()
-            for matched in re.finditer(count_pattern, inp):
-                start, end = matched.span()
-                inp = inp[:start] + '#' * (end - start) + inp[end:]
-                matches.append(matched)
+        count_pattern = self.pattern.format()
+        for matched in re.finditer(count_pattern, inp):
+            start, end = matched.span()
+            inp = inp[:start] + '#' * (end - start) + inp[end:]
+            matches.append(matched)
         return matches
 
     def find_email(self, text):

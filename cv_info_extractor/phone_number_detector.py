@@ -15,11 +15,10 @@ class PhoneNumberDetection:
     def match_phone_number(self, inp1):
         matches = []
         inp = digits.fa_to_en(inp1)
-        for keyword_count in range(10, 0, -1):
-            for matched in re.finditer(self.pattern, inp):
-                start, end = matched.span()
-                inp = inp[:start] + '#' * (end - start) + inp[end:]
-                matches.append(matched)
+        for matched in re.finditer(self.pattern, inp):
+            start, end = matched.span()
+            inp = inp[:start] + '#' * (end - start) + inp[end:]
+            matches.append(matched)
         return matches
 
     def find_phone_number(self, text):
