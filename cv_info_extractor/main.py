@@ -3,6 +3,7 @@ from hazm import Normalizer
 
 from cv_info_extractor.city_extractor import CityProvinceExtractor
 from cv_info_extractor.email_detector import EmailDetection
+from cv_info_extractor.emp_stat_extractor import EmploymentStatusExtractor
 from cv_info_extractor.name_detector import NameDetection
 from cv_info_extractor.phone_number_detector import PhoneNumberDetection
 from cv_info_extractor.date_extractor import DateDetection
@@ -39,5 +40,6 @@ def run(address):
         if type(info) == dict:
             result.update(info)
     job_section = JobExpSecExtraction().extract(result)
+    result['وضعیت اشتغال'] = EmploymentStatusExtractor().find(final_text, job_section)
     print(result)
     return result
