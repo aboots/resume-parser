@@ -10,7 +10,11 @@ class NameDetection:
         with open('cv_info_extractor/resources/first_names_regex.json', 'r', encoding="utf-8") as file:
             self.first_names_reg = json.loads(file.read())
 
-        self.pattern = f"(^|\W)((((({self.first_names_reg})(\W+))+)({self.last_names_reg}))|({self.last_names_reg})|({self.first_names_reg}))($|\W)"
+        self.pattern = f"(^|\W)((((({self.first_names_reg})(\W+))+)({self.last_names_reg}))|(((({self.first_names_reg})(\W+))+)(\w+))|({self.last_names_reg})|({self.first_names_reg}))($|\W)"
+        # self.pattern = f"(^|\W)((((({self.first_names_reg})(\W+))+)({self.last_names_reg}))|({self.last_names_reg})|({self.first_names_reg}))($|\W)"
+        # self.pattern2 = f"(^|\W)(((({self.first_names_reg})(\W+))+)(\w))($|\W)"
+        # self.pattern2 = f"(((({self.first_names_reg})(\W+))+)(\w))"
+        # self.pattern = f"(^|\W)((((({self.first_names_reg})(\W+))+)({self.last_names_reg}))|({self.last_names_reg})|({self.first_names_reg}))($|\W)"
 
     def match_name(self, inp):
         matches = []
@@ -26,6 +30,16 @@ class NameDetection:
         if not matched_names:
             return ['Not Found'] * 3
         full_name = matched_names[0].group().strip()
-        first_name = matched_names[0].groups()[3].strip() if matched_names[0].groups()[3] else 'None'
-        last_name = matched_names[0].groups()[-4].strip() if matched_names[0].groups()[-4] else 'None'
+        if matched_names[0].groups()[3]:
+            first_name = matched_names[0].groups()[3].strip()
+        elif len(matched_names[0].groups()) > 9 and matched_names[0].groups()[9]:
+            first_name = matched_names[0].groups()[9].strip()
+        else:
+            first_name = 'None'
+        if len(matched_names[0].groups()) > 7 and matched_names[0].groups()[7]:
+            last_name = matched_names[0].groups()[7].strip()
+        elif matched_names[0].groups()[-4]:
+            last_name = matched_names[0].groups()[-4].strip()
+        else:
+            last_name = 'None'
         return full_name, first_name, last_name

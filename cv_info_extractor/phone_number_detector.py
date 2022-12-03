@@ -8,7 +8,7 @@ class PhoneNumberDetection:
         self.pattern2 = r"(^|\W)((\+98|0)(\s)?9\d{9})($|\W)"
         self.pattern3 = r"(^|\W)((\+98|0)(\s)?(9\d{2})(\s)?(\d{4})(\s)?(\d{3}))($|\W)"
         self.pattern4 = r"(^|\W)(\(\+98\)?9\d{9})($|\W)"
-        self.pattern5 = r"(^|\W)((\+98|0)(9\d{2})(\s)?(\d{3})(\s)?(\d{4}))($|\W)"
+        self.pattern5 = r"(^|\W)((\+98|0)(\s)*(9\d{2})(\s)*(\d{3})(\s)*(\d{4}))($|\W)"
         self.pattern = f'{self.pattern1}|{self.pattern2}|{self.pattern3}|{self.pattern4}|{self.pattern5}'
 
     def match_phone_number(self, inp1):
