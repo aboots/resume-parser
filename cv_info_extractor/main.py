@@ -4,6 +4,8 @@ from hazm import Normalizer
 from cv_info_extractor.city_extractor import CityProvinceExtractor
 from cv_info_extractor.email_detector import EmailDetection
 from cv_info_extractor.emp_stat_extractor import EmploymentStatusExtractor
+from cv_info_extractor.expected_salary_extractor import ExpectedSalaryExtractor
+from cv_info_extractor.job_expected_extractor import JobExpectedExtractor
 from cv_info_extractor.name_detector import NameDetection
 from cv_info_extractor.phone_number_detector import PhoneNumberDetection
 from cv_info_extractor.date_extractor import DateDetection
@@ -23,7 +25,7 @@ def run(address):
     normalizer = Normalizer()
     final_text = normalizer.normalize(final_text)
     final_text = CusNormalizer().normalize(final_text)
-    print(final_text)
+    # print(final_text)
     result['ایمیل'] = email
     full_name, first_name, last_name = NameDetection().find_name(final_text)
     result['نام'] = first_name
@@ -41,5 +43,7 @@ def run(address):
             result.update(info)
     job_section = JobExpSecExtraction().extract(result)
     result['وضعیت اشتغال'] = EmploymentStatusExtractor().find(final_text, job_section)
+    result['نوع شغل موردنظر'] = JobExpectedExtractor().find(final_text)
+    result['حقوق موردانتظار'] = ExpectedSalaryExtractor().find(final_text)
     print(result)
     return result
