@@ -1,11 +1,7 @@
 import pandas as pd
 from cv_info_extractor import run
 
-#print(run("CV1.pdf"))
-
-# run("cv_test_2.pdf")
-
-cvs = ['CV2']
+cvs = ['CV1', 'CV2']
 res = []
 
 for cv in cvs:
