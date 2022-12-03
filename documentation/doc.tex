@@ -1,0 +1,238 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{colortbl}
+\usepackage{environ}
+\usepackage{xcolor}
+\usepackage{ninecolors}
+\usepackage{tabularray}
+
+
+
+\usepackage[localise=on]{xepersian}
+\settextfont{XB Yas}
+
+
+\graphicspath{ {./images/} }
+
+
+\renewcommand{\footrulewidth}{0.4pt}
+
+\newcommand{\name}{
+	گروه ۱
+}
+
+\newcommand{\studentid}{
+}
+
+
+\newcommand{\course}{
+	درس
+}
+
+\newcommand{\instructor}{
+	استاد
+}
+
+\newcommand{\hw}{
+	تمرین
+}
+
+
+\newcommand{\firstpage}[3]{
+	\title{
+		\includegraphics[width=0.4\textwidth]{sharif.png}\\
+		\vspace{0.15cm}
+		\normalsize{دانشکده مهندسی کامپیوتر}
+		\\	\vspace{1cm}
+		\Large{#1}
+		\\ \vspace{.6cm}
+		\huge{#2}
+		\\  \vspace{0.6cm}
+		\Large{#3}
+		\\ \vspace{6cm}
+	}
+	\author{\name}
+	\date{\today}
+}
+
+
+\newcommand{\init}[3]{
+	\clearpage
+	\maketitle
+	\thispagestyle{empty}
+	\newpage
+	\clearpage
+	\pagestyle{fancy}
+	\lhead{#1}
+	\rhead{#2}
+	\ifnum #3 = 1
+	\tableofcontents
+	\fi
+	\newpage
+	\fancyfoot[C]{\thepage}
+}
+
+
+
+
+\NewEnviron{image}[3]{
+	\begin{figure}[H]
+		\includegraphics[scale=#1]{#2}
+		\centering
+		\ifnum #3 = 1
+		\caption{\BODY}
+		\fi
+	\end{figure}
+}
+
+%Sample
+%-------------
+%\begin{image}{0.3}{sharif}{1}
+%	این یک نمونه است.
+%\end{image}
+%-------------
+
+
+\NewEnviron{boxenv}{
+	\begin{center}
+		\begin{tblr}{
+				hlines = {1.3pt, red},
+				vlines = {1.3pt, red},
+			}
+			\textbf{\BODY}
+		\end{tblr}
+	\end{center}
+}
+
+%Sample
+%-------------
+%	\begin{boxenv}
+%	این یک نمونه است.
+%	\end{boxenv}
+%-------------
+
+
+% Table
+%Sample
+%-------------
+%\begin{latin}
+%	\begin{center}
+	%		\begin{tblr}{|c|c|c|c|}
+		%			\hline
+		%			a & b & c & d \\
+		%			\hline
+		%			e & f & g & h \\ 
+		%			\hline
+		%		\end{tblr}
+	%	\end{center}
+%\end{latin}
+%-------------
+
+
+\firstpage{\course}{\hw}{\instructor}
+
+
+
+\begin{document}
+	
+	\init{\course}{\hw}{1}
+	
+	در این تمرین، ابزاری جهت استخراج اطلاعات رزومه با استفاده از عبارات منظم برای زبان فارسی توسعه می‌دهیم.
+	
+	\section{پیش‌پردازش}
+	
+	برای پیش‌پردازش از ابزار نرمالیزیشن کتاب‌خانه hazm استفاده می‌کنیم. البته در بعضی از ماژول‌ها و تسک‌ها پیش‌پردازش‌های مخصوص آن را اعمال می‌کنیم.
+	
+	\section{استخراج نام}
+	
+	برای استخراج نام، ماژول \lr{NameDetector} را می‌سازیم. این ماژول با دریافت اسامی کراول شده در اینترنت (شامل نام و نام‌خانوادگی) و پترن‌های مشخص نام، شروع به استخراج نام‌ها از رزومه می‌کند. تصویر این ماژول را در زیر مشاهده می‌نمایید. این ماژول توانایی پیدا کردن نام‌های ترکیبی و نام‌هایی که نام خانوادگی آن در دیتاست نام‌های خانوادگی وجود ندارد را نیز دارا می‌باشد. (لازم به ذکر است دیتاست نام در فولدر resources قرار دارد.)
+	
+	\begin{image}{0.3}{name}{1}
+	تصویر ماژول نام
+	\end{image}
+
+	
+	\section{استخراج ایمیل}
+	
+	برای استخراج ایمیل، ماژول \lr{EmailDetector} را می‌سازیم. این ماژول با پترن‌های ایمیل شروع به استخراج ایمیل از رزومه می‌کند. تصویر این ماژول را در زیر مشاهده می‌نمایید.
+	
+	
+	\begin{image}{0.4}{email}{1}
+		تصویر ماژول ایمیل
+	\end{image}
+	
+	\section{استخراج شهر}
+	
+	برای استخراج شهر، ابتدا اسامی را که بین شهرها و استان‌ها مشترک هستند (مانند تهران و یزد) کراول می‌کنیم و در فایل cities.csv ذخیره می‌کنیم. سپس کل متن را پیمایش می‌کنیم و اسامی شهرها، استان‌ها و اسامی مشترک را mask می‌کنیم. سپس با استفاده از الگوهای این ماژول، نام شهرها و استان‌ها را استحراج می‌کنیم.
+	
+	
+	
+	
+	\begin{image}{0.25}{city}{1}
+		تصویر ماژول استخراج شهر
+	\end{image}
+	
+	
+	\section{استخراج تاریخ تولد}
+	
+	برای استخراج تاریخ تولد، ابتدا با استفاده از الگوهای تاریخ شروع به استخرا تاریخ می‌کنیم. سپس با چک کردن مکان کلمات مرتبط با تاریخ تولد، نزدیک‌ترین تاریخ (که تا ۱۰۰ کاراکتر بعد می‌تواند باشد) را برمی‌گردانیم.
+	
+	
+	
+	
+	\begin{image}{0.25}{date}{1}
+		تصویر ماژول استخراج تاریخ تولد
+	\end{image}
+
+
+	\section{استخراج شماره تلفن}
+	
+	برای استخراج شماره تلفن، ابتدا  الگوهای متداول شماره تلفن و انواع مرسوم نوشتن شماره را به دست آورده و با استفاده از این الگوها، شماره تلفن را به دست می‌آوریم.
+	
+	
+	
+	
+	\begin{image}{0.3}{phone}{1}
+		تصویر ماژول استخراج شماره تلفن
+	\end{image}
+
+	\section{استخراج وضعیت شغلی}
+	
+	برای استخراج وضعیت شغلی، از تعدادی کلمات کلیدی استفاده می‌کنیم. سپس با استفاده از تعدادی حالت پیش‌فرض برای وضعیت شغلی، در صورت وجود آن‌ها، برگردانده می‌شوند و در غیر این‌صورت، در سوابق شغلی شروع به بررسی تعدادی کلمات کلیدی با مضمون ''تا کنون`` می‌کند و در صورت وجود آن‌ها را برمی‌گرداند.
+	
+	هم‌چنین برای حقوق مورد انتظار و نوع شغل مورد نظر نیز ماژول‌های جداگانه ساخته شده که از روی کلمات کلیدی و مقادیر مشخص اقدام به استخراج این موارد می‌نماید که ساختاری بسیار شبیه به وضعیت اشتغال دارد.
+	
+	
+	\begin{image}{0.4}{job}{1}
+		تصویر ماژول وضعیت شغلی
+	\end{image}
+
+	\section{استخراج بخش‌های اضافه}
+
+برای بخش‌های اضافی، ابتدا لیستی از عناوین  این بخش‌ها (شامل سوابق تحصیلی، سوابق شغلی، دستاوردها، پروژه‌ها و غیره) را در فایل keywords.txt قرار می‌دهیم. سپس، با خواندن آن‌ها شروع به بخش کردن رزومه به هر یک از آن‌ها می‌کنیم. در نهایت این بخش‌ها را تشخیص داده و خروجی می‌دهیم.
+
+
+
+	\begin{image}{0.4}{extra}{1}
+	تصویر ماژول استخراج بخش‌های اضافه
+	\end{image}
+
+	\section{نتایج}
+	
+	برای خروجی، کافی است که لیستی از رزومه‌هایی که می‌خواهیم را در فایل \lr{cv\_extractor.py} قرار دهیم. سپس با اجرای این فایل، خروجی به صورت CSV در فایل output.csv قرار می‌گیرد. در زیر نمونه‌ای از خروجی را که نتیجه حاصل از اجرای استخراج کننده بر روی دو رزومه است را مشاهده می‌کنید.
+	
+	
+	
+	
+	\begin{image}{0.3}{output}{1}
+		تصویری از خروجی دو رزومه
+	\end{image}
+	
+\end{document}
