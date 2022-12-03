@@ -20,9 +20,9 @@ def run(address):
         final_text += text
     email = EmailDetection().find_email(final_text)
     normalizer = Normalizer()
-    print(final_text)
     final_text = normalizer.normalize(final_text)
     final_text = CusNormalizer().normalize(final_text)
+    print(final_text)
     result['ایمیل'] = email
     full_name, first_name, last_name = NameDetection().find_name(final_text)
     result['نام'] = first_name
