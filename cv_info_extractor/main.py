@@ -50,6 +50,5 @@ def run(address):
     if job_title == 'None':
         job_title = JobTitleFinder().find(job_section)
     result['عنوان شغلی'] = job_title
-    print(first_sec)
     print(result)
     return result
