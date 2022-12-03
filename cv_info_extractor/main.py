@@ -19,8 +19,8 @@ def run(address):
         final_text += text
     email = EmailDetection().find_email(final_text)
     normalizer = Normalizer()
-    final_text = normalizer.normalize(final_text)
-    
+    # final_text = normalizer.normalize(final_text)
+
     final_text = CusNormalizer().normalize(final_text)
     print(final_text)
     result['ایمیل'] = email
