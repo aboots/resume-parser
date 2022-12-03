@@ -3,9 +3,6 @@ import re
 
 class EmploymentStatusExtractor:
     def __init__(self) -> None:
-        pass
-
-    def find(self, text, job_text):
         keys = [
             "وﺿﻌﯿﺖ اﺷﺘﻐﺎل",
             "وضعیت اشتغالی",
@@ -17,6 +14,7 @@ class EmploymentStatusExtractor:
         values = [
             "علاقه مند",
             "علاقه‌مند",
+            "ﻋﻼﻗﻪ ﻣﻨﺪ",
             "بیکار",
             "مشغول",
             "شاغل",
@@ -29,16 +27,19 @@ class EmploymentStatusExtractor:
             "تا الان",
             "تا الآن",
         ]
-        pattern_keys = r"({})\s*:*".format("|".join(keys))
-        pattern_values = r"({})".format("|".join(values))
-        pattern_up_to_now = r"({})".format("|".join(up_to_now))
+        self.pattern_keys = r"({})\s*:*".format("|".join(keys))
+        self.pattern_values = r"({})".format("|".join(values))
+        self.pattern_up_to_now = r"({})".format("|".join(up_to_now))
+
+    def find(self, text1, job_text):
+        text = text1
         text = re.sub(r"\n+", r" ", text)
         text = re.sub(r"\s+", r" ", text)
-        for match_key in re.finditer(pattern_keys, text):
+        for match_key in re.finditer(self.pattern_keys, text):
             for match_value in re.finditer(
-                pattern_values, text[match_key.end() : match_key.end() + 40]
+                self.pattern_values, text[match_key.end() : match_key.end() + 40]
             ):
                 return match_value.group(1)
-        if len(re.findall(pattern_up_to_now, job_text)) != 0:
+        if len(re.findall(self.pattern_up_to_now, job_text)) != 0:
             return "تا کنون شاغل"
-        return None
+        return "None"

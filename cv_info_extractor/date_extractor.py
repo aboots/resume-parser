@@ -27,7 +27,10 @@ class DateDetection:
         for keyword in self.keywords:
             if keyword not in text:
                 continue
-            text1 = text[text.find(keyword):]
+            if text.find(keyword) + 100 < len(text):
+                text1 = text[text.find(keyword):text.find(keyword) + 100]
+            else:
+                text1 = text[text.find(keyword):]
             matched_dates = self.match_date(text1)
             if not matched_dates:
                 matched_dates = self.match_date(text1[::-1])

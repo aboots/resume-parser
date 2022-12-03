@@ -1,0 +1,9 @@
+\contentsline {section}{\numberline {1}پیش‌پردازش}{3}{section.1}%
+\contentsline {section}{\numberline {2}استخراج نام}{3}{section.2}%
+\contentsline {section}{\numberline {3}استخراج ایمیل}{4}{section.3}%
+\contentsline {section}{\numberline {4}استخراج شهر}{4}{section.4}%
+\contentsline {section}{\numberline {5}استخراج تاریخ تولد}{5}{section.5}%
+\contentsline {section}{\numberline {6}استخراج شماره تلفن}{6}{section.6}%
+\contentsline {section}{\numberline {7}استخراج وضعیت شغلی}{7}{section.7}%
+\contentsline {section}{\numberline {8}استخراج بخش‌های اضافه}{7}{section.8}%
+\contentsline {section}{\numberline {9}نتایج}{8}{section.9}%
