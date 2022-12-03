@@ -20,6 +20,7 @@ def run(address):
     email = EmailDetection().find_email(final_text)
     normalizer = Normalizer()
     final_text = normalizer.normalize(final_text)
+    
     final_text = CusNormalizer().normalize(final_text)
     print(final_text)
     result['ایمیل'] = email
@@ -28,6 +29,7 @@ def run(address):
     result['نام خانوادگی'] = last_name
     phone_number = PhoneNumberDetection().find_phone_number(final_text)
     result['شماره تماس'] = phone_number
+    print(phone_number)
     date = DateDetection().find_date_number(final_text)
     result['تاریخ تولد'] = date
     extra = SectionExtractor().find_sections(final_text)
