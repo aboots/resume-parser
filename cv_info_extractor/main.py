@@ -37,7 +37,7 @@ def run(address):
     city = CityProvinceExtractor().find(final_text)[0]
     result['استان محل سکونت'] = city['province']
     result['شهر محل سکونت'] = city['city']
-    extra = SectionExtractor().find_sections(final_text)
+    extra, first_sec = SectionExtractor().find_sections(final_text)
     for info in extra:
         if type(info) == dict:
             result.update(info)

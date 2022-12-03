@@ -20,10 +20,14 @@ class SectionExtractor:
         idx_vals = [list(i.values())[0] for i in idxs]
         matches = [{list(idxs[i].keys())[0]: inp[idx_vals[i] + len(list(idxs[i].keys())[0]) + 1:idx_vals[i + 1]]} for i
                    in range(len(idx_vals) - 1)]
-        return matches
+        first_idx = min(idx_vals) if len(idx_vals) > 0 else -1
+        return matches, first_idx
 
     def find_sections(self, text):
-        matched_sections = self.match_sections(text)
+        matched_sections, first_idx = self.match_sections(text)
+        first_sec = text
+        if first_idx != -1:
+            first_sec = text[:first_idx]
         if not matched_sections:
-            return 'Not Found'
-        return matched_sections
+            return 'Not Found',
+        return matched_sections, first_sec
