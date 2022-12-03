@@ -6,6 +6,7 @@ from cv_info_extractor.email_detector import EmailDetection
 from cv_info_extractor.emp_stat_extractor import EmploymentStatusExtractor
 from cv_info_extractor.expected_salary_extractor import ExpectedSalaryExtractor
 from cv_info_extractor.job_expected_extractor import JobExpectedExtractor
+from cv_info_extractor.job_title_extractor import JobTitleFinder
 from cv_info_extractor.name_detector import NameDetection
 from cv_info_extractor.phone_number_detector import PhoneNumberDetection
 from cv_info_extractor.date_extractor import DateDetection
@@ -45,5 +46,10 @@ def run(address):
     result['وضعیت اشتغال'] = EmploymentStatusExtractor().find(final_text, job_section)
     result['نوع شغل موردنظر'] = JobExpectedExtractor().find(final_text)
     result['حقوق موردانتظار'] = ExpectedSalaryExtractor().find(final_text)
+    job_title = JobTitleFinder().find(first_sec)
+    if job_title == 'None':
+        job_title = JobTitleFinder().find(job_section)
+    result['عنوان شغلی'] = job_title
+    print(first_sec)
     print(result)
     return result

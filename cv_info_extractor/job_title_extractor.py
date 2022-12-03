@@ -5,7 +5,7 @@ class JobTitleFinder:
     def __init__(self) -> None:
         titles = list(
             pd.read_csv(
-                "./resources/jobs.csv",
+                "cv_info_extractor/resources/jobs.csv",
             )["title"]
         )
         expanded_1 = [
@@ -29,3 +29,4 @@ class JobTitleFinder:
                 index = normalized_text.index(title)
                 if index < min_index:
                     return self.titles[idx]
+        return 'None'
