@@ -11,10 +11,6 @@ class NameDetection:
             self.first_names_reg = json.loads(file.read())
 
         self.pattern = f"(^|\W)((((({self.first_names_reg})(\W+))+)({self.last_names_reg}))|(((({self.first_names_reg})(\W+))+)(\w+))|({self.last_names_reg})|({self.first_names_reg}))($|\W)"
-        # self.pattern = f"(^|\W)((((({self.first_names_reg})(\W+))+)({self.last_names_reg}))|({self.last_names_reg})|({self.first_names_reg}))($|\W)"
-        # self.pattern2 = f"(^|\W)(((({self.first_names_reg})(\W+))+)(\w))($|\W)"
-        # self.pattern2 = f"(((({self.first_names_reg})(\W+))+)(\w))"
-        # self.pattern = f"(^|\W)((((({self.first_names_reg})(\W+))+)({self.last_names_reg}))|({self.last_names_reg})|({self.first_names_reg}))($|\W)"
 
     def match_name(self, inp):
         matches = []
