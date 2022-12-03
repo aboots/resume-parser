@@ -2,6 +2,7 @@ from PyPDF2 import PdfReader
 from hazm import Normalizer
 import re
 
+from cv_info_extractor.city_extractor import CityProvinceExtractor
 from cv_info_extractor.email_detector import EmailDetection
 from cv_info_extractor.name_detector import NameDetection
 from cv_info_extractor.phone_number_detector import PhoneNumberDetection
@@ -32,6 +33,9 @@ def run(address):
     print(phone_number)
     date = DateDetection().find_date_number(final_text)
     result['تاریخ تولد'] = date
+    city = CityProvinceExtractor().find(final_text)[0]
+    result['استان محل سکونت'] = city['province']
+    result['شهر محل سکونت'] = city['city']
     extra = SectionExtractor().find_sections(final_text)
     for info in extra:
         if type(info) == dict:
