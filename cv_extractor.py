@@ -1,7 +1,7 @@
 import pandas as pd
 from cv_info_extractor import run
 
-cvs = ['CV2', 'CV3']
+cvs = ['CV2', 'CV3', 'CV4']
 res = []
 
 for cv in cvs:
